@@ -4,13 +4,12 @@ import './transaction_list.dart';
 import './new_transaction.dart';
 import '../models/transaction.dart';
 
-class NewUserTransactions extends StatefulWidget {
+class UserTransactions extends StatefulWidget {
   @override
-  _NewUserTransactionsState createState() => _NewUserTransactionsState();
+  _UserTransactionsState createState() => _UserTransactionsState();
 }
 
-class _NewUserTransactionsState extends State<NewUserTransactions> {
-
+class _UserTransactionsState extends State<UserTransactions> {
   final List<Transaction> _userTransactions = [
     Transaction(
       id: 't1',
@@ -26,14 +25,28 @@ class _NewUserTransactionsState extends State<NewUserTransactions> {
     ),
   ];
 
+  void _addNewTransaction(String txTitle, double txAmount) {
+    final newTx = Transaction(
+      id: DateTime.now().toString(),
+      title: txTitle,
+      amount: txAmount,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      // changes the list values, but not the pointer, which is final
+      _userTransactions.add(newTx);
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        NewTransaction(),
+        NewTransaction(_addNewTransaction),
         TransactionList(_userTransactions),
       ],
-      
     );
   }
 }
