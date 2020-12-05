@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   // This is linked to a TextField controller and saves the input
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
   final Function addTransaction;
 
   NewTransaction(this.addTransaction);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -17,7 +23,9 @@ class NewTransaction extends StatelessWidget {
       return; // stop the function execution
     }
 
-    addTransaction(enteredTitle, enteredAmount);
+    // with flutter widget. I can access the class vars
+    // from within the state class
+    widget.addTransaction(enteredTitle, enteredAmount);
   }
 
   @override
