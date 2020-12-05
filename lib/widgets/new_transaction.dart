@@ -26,6 +26,9 @@ class _NewTransactionState extends State<NewTransaction> {
     // with flutter widget. I can access the class vars
     // from within the state class
     widget.addTransaction(enteredTitle, enteredAmount);
+
+    // This closes the input data nav when we submit
+    Navigator.of(context).pop();
   }
 
   @override
